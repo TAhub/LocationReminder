@@ -18,8 +18,9 @@
     [super viewDidLoad];
 	
 	//give it nice rounded borders
-	[[_backerOutlet layer] setCornerRadius:12];
-	[[_mapOutlet layer] setCornerRadius:12];
+	[[self.backerOutlet layer] setCornerRadius:12];
+	[[self.mapOutlet layer] setCornerRadius:12];
+//	[self.mapOutlet setShowsUserLocation:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,7 +44,7 @@
 	CLLocationCoordinate2D coordTo = CLLocationCoordinate2DMake(25, -71);
 	MKCoordinateSpan spanTo = MKCoordinateSpanMake(15, 15);
 	MKCoordinateRegion regionTo = MKCoordinateRegionMake(coordTo, spanTo);
-	[_mapOutlet setRegion:regionTo animated:YES];
+	[self.mapOutlet setRegion:regionTo animated:YES];
 }
 
 - (IBAction)buttonTwoAction
@@ -52,7 +53,7 @@
 	CLLocationCoordinate2D coordTo = CLLocationCoordinate2DMake(36.4511, 28.2278);
 	MKCoordinateSpan spanTo = MKCoordinateSpanMake(0.1, 0.1);
 	MKCoordinateRegion regionTo = MKCoordinateRegionMake(coordTo, spanTo);
-	[_mapOutlet setRegion:regionTo animated:YES];
+	[self.mapOutlet setRegion:regionTo animated:YES];
 }
 
 - (IBAction)buttonThreeAction
@@ -61,7 +62,7 @@
 	CLLocationCoordinate2D coordTo = CLLocationCoordinate2DMake(-90, 0);
 	MKCoordinateSpan spanTo = MKCoordinateSpanMake(10, 10);
 	MKCoordinateRegion regionTo = MKCoordinateRegionMake(coordTo, spanTo);
-	[_mapOutlet setRegion:regionTo animated:YES];
+	[self.mapOutlet setRegion:regionTo animated:YES];
 }
 
 @end

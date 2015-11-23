@@ -14,6 +14,8 @@
 		E42F7CC61C03B722003A629B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E42F7CC41C03B722003A629B /* LaunchScreen.storyboard */; };
 		E42F7CCE1C03B732003A629B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E42F7CCD1C03B732003A629B /* MapKit.framework */; };
 		E42F7CD11C03B86F003A629B /* MainMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E42F7CD01C03B86F003A629B /* MainMapViewController.m */; };
+		E42F7CD31C03C0EE003A629B /* CustomStack.m in Sources */ = {isa = PBXBuildFile; fileRef = E42F7CD21C03C0EE003A629B /* CustomStack.m */; };
+		E42F7CD61C03C111003A629B /* CustomQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E42F7CD51C03C111003A629B /* CustomQueue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,12 @@
 		E42F7CCD1C03B732003A629B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E42F7CCF1C03B86F003A629B /* MainMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMapViewController.h; sourceTree = "<group>"; };
 		E42F7CD01C03B86F003A629B /* MainMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMapViewController.m; sourceTree = "<group>"; };
+		E42F7CD21C03C0EE003A629B /* CustomStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomStack.m; sourceTree = "<group>"; };
+		E42F7CD41C03C0FB003A629B /* CustomStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomStack.h; sourceTree = "<group>"; };
+		E42F7CD51C03C111003A629B /* CustomQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomQueue.m; sourceTree = "<group>"; };
+		E42F7CD71C03C11F003A629B /* CustomQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomQueue.h; sourceTree = "<group>"; };
+		E42F7CD81C03C88C003A629B /* CustomStackNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomStackNode.h; sourceTree = "<group>"; };
+		E42F7CD91C03C985003A629B /* CustomQueueNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomQueueNode.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +72,14 @@
 			children = (
 				E42F7CCF1C03B86F003A629B /* MainMapViewController.h */,
 				E42F7CD01C03B86F003A629B /* MainMapViewController.m */,
+				E42F7CD41C03C0FB003A629B /* CustomStack.h */,
+				E42F7CD21C03C0EE003A629B /* CustomStack.m */,
+				E42F7CD81C03C88C003A629B /* CustomStackNode.h */,
+				E42F7CD71C03C11F003A629B /* CustomQueue.h */,
+				E42F7CD51C03C111003A629B /* CustomQueue.m */,
+				E42F7CD91C03C985003A629B /* CustomQueueNode.h */,
 				E42F7CBF1C03B722003A629B /* Main.storyboard */,
+				E42F7CB71C03B722003A629B /* main.m */,
 				E42F7CB61C03B722003A629B /* Supporting Files */,
 			);
 			path = LocationReminder;
@@ -77,7 +92,6 @@
 				E42F7CBA1C03B722003A629B /* AppDelegate.m */,
 				E42F7CC41C03B722003A629B /* LaunchScreen.storyboard */,
 				E42F7CC71C03B722003A629B /* Info.plist */,
-				E42F7CB71C03B722003A629B /* main.m */,
 				E42F7CC21C03B722003A629B /* Assets.xcassets */,
 			);
 			name = "Supporting Files";
@@ -159,7 +173,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E42F7CBB1C03B722003A629B /* AppDelegate.m in Sources */,
+				E42F7CD31C03C0EE003A629B /* CustomStack.m in Sources */,
 				E42F7CB81C03B722003A629B /* main.m in Sources */,
+				E42F7CD61C03C111003A629B /* CustomQueue.m in Sources */,
 				E42F7CD11C03B86F003A629B /* MainMapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
