@@ -50,6 +50,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E422D17C1C03CC1200E159F4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E42F7CCF1C03B86F003A629B /* MainMapViewController.h */,
+				E42F7CD01C03B86F003A629B /* MainMapViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		E422D17D1C03CC1700E159F4 /* Coding Challenges */ = {
+			isa = PBXGroup;
+			children = (
+				E42F7CD41C03C0FB003A629B /* CustomStack.h */,
+				E42F7CD21C03C0EE003A629B /* CustomStack.m */,
+				E42F7CD81C03C88C003A629B /* CustomStackNode.h */,
+				E42F7CD71C03C11F003A629B /* CustomQueue.h */,
+				E42F7CD51C03C111003A629B /* CustomQueue.m */,
+				E42F7CD91C03C985003A629B /* CustomQueueNode.h */,
+			);
+			name = "Coding Challenges";
+			sourceTree = "<group>";
+		};
+		E422D17E1C03CC3100E159F4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E42F7CBF1C03B722003A629B /* Main.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		E42F7CAA1C03B722003A629B = {
 			isa = PBXGroup;
 			children = (
@@ -70,16 +100,9 @@
 		E42F7CB51C03B722003A629B /* LocationReminder */ = {
 			isa = PBXGroup;
 			children = (
-				E42F7CCF1C03B86F003A629B /* MainMapViewController.h */,
-				E42F7CD01C03B86F003A629B /* MainMapViewController.m */,
-				E42F7CD41C03C0FB003A629B /* CustomStack.h */,
-				E42F7CD21C03C0EE003A629B /* CustomStack.m */,
-				E42F7CD81C03C88C003A629B /* CustomStackNode.h */,
-				E42F7CD71C03C11F003A629B /* CustomQueue.h */,
-				E42F7CD51C03C111003A629B /* CustomQueue.m */,
-				E42F7CD91C03C985003A629B /* CustomQueueNode.h */,
-				E42F7CBF1C03B722003A629B /* Main.storyboard */,
-				E42F7CB71C03B722003A629B /* main.m */,
+				E422D17C1C03CC1200E159F4 /* Controller */,
+				E422D17D1C03CC1700E159F4 /* Coding Challenges */,
+				E422D17E1C03CC3100E159F4 /* View */,
 				E42F7CB61C03B722003A629B /* Supporting Files */,
 			);
 			path = LocationReminder;
@@ -93,6 +116,7 @@
 				E42F7CC41C03B722003A629B /* LaunchScreen.storyboard */,
 				E42F7CC71C03B722003A629B /* Info.plist */,
 				E42F7CC21C03B722003A629B /* Assets.xcassets */,
+				E42F7CB71C03B722003A629B /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -325,6 +349,7 @@
 				E42F7CCC1C03B722003A629B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
