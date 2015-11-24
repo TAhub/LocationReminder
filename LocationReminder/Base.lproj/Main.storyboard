@@ -75,11 +75,79 @@
                     <connections>
                         <outlet property="backerOutlet" destination="0Ol-oC-aLU" id="lm6-Xl-YZp"/>
                         <outlet property="mapOutlet" destination="ugM-fB-hzb" id="MfQ-5J-Kvi"/>
+                        <segue destination="c5b-Wu-E9U" kind="presentation" identifier="addReminder" id="yJx-Ri-rdP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TUi-R2-M4a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-79" y="363"/>
+        </scene>
+        <!--Add Reminder View Controller-->
+        <scene sceneID="gFt-TL-4T5">
+            <objects>
+                <viewController id="c5b-Wu-E9U" customClass="AddReminderViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3Zl-3T-vWp"/>
+                        <viewControllerLayoutGuide type="bottom" id="Enj-Uy-vxm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ama-Tk-Ovc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ljp-0x-0Fi">
+                                <rect key="frame" x="249" y="128" width="103" height="32"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <state key="normal" title="Add Reminder"/>
+                                <connections>
+                                    <action selector="addReminderAction" destination="c5b-Wu-E9U" eventType="touchUpInside" id="4RA-7p-lMs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mi1-V5-6Qz">
+                                <rect key="frame" x="275" y="168" width="50" height="32"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelAction" destination="c5b-Wu-E9U" eventType="touchUpInside" id="idz-IA-2ps"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" (0, 0)?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKS-y4-FnV">
+                                <rect key="frame" x="259" y="87" width="82" height="33"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a reminder to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQi-br-snH">
+                                <rect key="frame" x="224" y="64" width="152" height="23"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GKS-y4-FnV" firstAttribute="top" secondItem="eQi-br-snH" secondAttribute="bottom" id="6Mn-Kg-Onx"/>
+                            <constraint firstItem="GKS-y4-FnV" firstAttribute="centerX" secondItem="Ama-Tk-Ovc" secondAttribute="centerX" id="HIj-YK-blZ"/>
+                            <constraint firstItem="eQi-br-snH" firstAttribute="centerX" secondItem="Ama-Tk-Ovc" secondAttribute="centerX" id="R9h-2j-Rmf"/>
+                            <constraint firstItem="ljp-0x-0Fi" firstAttribute="top" secondItem="GKS-y4-FnV" secondAttribute="bottom" constant="8" symbolic="YES" id="Rwv-WC-rJR"/>
+                            <constraint firstItem="eQi-br-snH" firstAttribute="centerY" secondItem="Ama-Tk-Ovc" secondAttribute="centerY" multiplier="0.25" id="SVd-Ti-bAo"/>
+                            <constraint firstItem="ljp-0x-0Fi" firstAttribute="centerX" secondItem="Ama-Tk-Ovc" secondAttribute="centerX" id="cjS-Ko-bU8"/>
+                            <constraint firstItem="GKS-y4-FnV" firstAttribute="centerY" secondItem="Ama-Tk-Ovc" secondAttribute="centerY" multiplier="0.2" id="fUP-XW-lBT"/>
+                            <constraint firstItem="Mi1-V5-6Qz" firstAttribute="centerX" secondItem="Ama-Tk-Ovc" secondAttribute="centerX" id="ge8-Lc-mCk"/>
+                            <constraint firstItem="Mi1-V5-6Qz" firstAttribute="top" secondItem="ljp-0x-0Fi" secondAttribute="bottom" constant="8" symbolic="YES" id="tuy-ho-2Am"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="fUP-XW-lBT"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="label" destination="GKS-y4-FnV" id="khj-kO-umd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="btc-bs-fjU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="617" y="363"/>
         </scene>
     </scenes>
 </document>

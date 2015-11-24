@@ -7,8 +7,17 @@
 //
 
 #import "MainMapViewController.h"
+#import "AddReminderViewController.h"
 
-@interface MainMapViewController ()
+@interface MainMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
+
+@property CLLocationManager *locationManager;
+
+@property UILongPressGestureRecognizer *longPressRecognizer;
+
+-(void)start;
+-(void)stop;
+-(IBAction)longPress:(UILongPressGestureRecognizer *)sender;
 
 @end
 
@@ -20,7 +29,57 @@
 	//give it nice rounded borders
 	[[self.backerOutlet layer] setCornerRadius:12];
 	[[self.mapOutlet layer] setCornerRadius:12];
-//	[self.mapOutlet setShowsUserLocation:YES];
+	self.mapOutlet.delegate = self;
+	
+	if ([CLLocationManager locationServicesEnabled])
+	{
+		//I am NOT using the significant-change service
+		//because I want to be able to detect when I am in all of my pre-picked locations
+		//which include places with no wifi
+		self.locationManager = [[CLLocationManager alloc] init];
+		self.locationManager.delegate = self;
+		self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+		self.locationManager.distanceFilter = 100.0f;
+		
+		[self.locationManager requestWhenInUseAuthorization];
+	}
+	
+	//add the long press
+	self.longPressRecognizer = [[UILongPressGestureRecognizer alloc] init];
+	[self.longPressRecognizer addTarget:self action:@selector(longPress:)];
+	[self.mapOutlet addGestureRecognizer:self.longPressRecognizer];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	
+	[self start];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+	
+	[self stop];
+}
+
+-(void)start
+{
+	if (self.locationManager != nil && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse)
+	{
+		[self.locationManager startUpdatingLocation];
+		self.mapOutlet.showsUserLocation = YES;
+	}
+}
+
+-(void)stop
+{
+	if (self.locationManager != nil)
+	{
+		[self.locationManager stopUpdatingLocation];
+		self.mapOutlet.showsUserLocation = NO;
+	}
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,15 +87,14 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+	MKAnnotationView *view = (MKAnnotationView *)sender;
+	AddReminderViewController *dest = (AddReminderViewController *)[segue destinationViewController];
+	dest.annotation = view;
 }
-*/
 
 - (IBAction)buttonOneAction
 {
@@ -63,6 +121,64 @@
 	MKCoordinateSpan spanTo = MKCoordinateSpanMake(10, 10);
 	MKCoordinateRegion regionTo = MKCoordinateRegionMake(coordTo, spanTo);
 	[self.mapOutlet setRegion:regionTo animated:YES];
+}
+
+#pragma mark - location manager delegate
+-(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+	//if you just got authorization, start updates
+	[self start];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+	
+}
+
+#pragma mark - map view delegate
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+{
+	//prevent it from turning the user location annotations into pins
+	if ([annotation isKindOfClass:[MKUserLocation class]]) { return nil; }
+	
+	//make the pin
+	MKPinAnnotationView *pin = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"AnnotationView"];
+	pin.annotation = annotation;
+	
+	//make a new one, if necessary
+	if (!pin)
+		pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"AnnotationView"];
+	
+	//give it a callout
+	pin.canShowCallout = YES;
+	UIButton *rightCallout = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+	pin.rightCalloutAccessoryView = rightCallout;
+	
+	return pin;
+}
+
+-(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
+	[self performSegueWithIdentifier:@"addReminder" sender:view];
+}
+
+#pragma mark - programatical action selector
+
+-(IBAction)longPress:(UILongPressGestureRecognizer *)sender
+{
+	if (sender.state == UIGestureRecognizerStateBegan)
+	{
+		//find where they long pressed
+		CGPoint touchPoint = [sender locationInView:self.mapOutlet];
+		CLLocationCoordinate2D touchCoordinate = [self.mapOutlet convertPoint:touchPoint toCoordinateFromView:self.mapOutlet];
+		
+		//make an annotation
+		MKPointAnnotation *newAnnotation = [[MKPointAnnotation alloc] init];
+		newAnnotation.coordinate = touchCoordinate;
+		newAnnotation.title = @"Look at this pin!";
+		
+		[self.mapOutlet addAnnotation:newAnnotation];
+	}
 }
 
 @end
