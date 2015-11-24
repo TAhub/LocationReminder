@@ -12,6 +12,7 @@
 //test code challenges
 #import "CustomStack.h"
 #import "CustomQueue.h"
+#import "StandaloneFunctions.h"
 
 int main(int argc, char * argv[]) {
 	
@@ -28,6 +29,12 @@ int main(int argc, char * argv[]) {
 	[q enqueue:@(1)];
 	[q enqueue:@(2)];
 	NSLog(@"The first thing dequeued is %@\n", [q dequeue]);
+	
+	//test the anagram tester
+	NSLog(@"Hello vs ellHo: %i", AnagramCheck(@"Hello", @"ellHo"));
+	NSLog(@"Cat vs Tac: %i", AnagramCheck(@"Cat", @"Tac"));
+	NSLog(@"Not vs An Anagram: %i", AnagramCheck(@"Not", @"An Anagram"));
+	NSLog(@"NAME PALINDROME CHECK: %i", AnagramCheck(@"Theodore Abshire", @"Dab Theories Hero"));
 	
 	
 	@autoreleasepool {

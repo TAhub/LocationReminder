@@ -17,6 +17,7 @@
 		E42F7CD31C03C0EE003A629B /* CustomStack.m in Sources */ = {isa = PBXBuildFile; fileRef = E42F7CD21C03C0EE003A629B /* CustomStack.m */; };
 		E42F7CD61C03C111003A629B /* CustomQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = E42F7CD51C03C111003A629B /* CustomQueue.m */; };
 		E44CDFA21C051FCA00F22743 /* AddReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E44CDFA11C051FCA00F22743 /* AddReminderViewController.m */; };
+		E44CDFA51C0524FC00F22743 /* StandaloneFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = E44CDFA41C0524FC00F22743 /* StandaloneFunctions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,8 @@
 		E42F7CD91C03C985003A629B /* CustomQueueNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomQueueNode.h; sourceTree = "<group>"; };
 		E44CDFA01C051FCA00F22743 /* AddReminderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddReminderViewController.h; sourceTree = "<group>"; };
 		E44CDFA11C051FCA00F22743 /* AddReminderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddReminderViewController.m; sourceTree = "<group>"; };
+		E44CDFA31C0524ED00F22743 /* StandaloneFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StandaloneFunctions.h; sourceTree = "<group>"; };
+		E44CDFA41C0524FC00F22743 /* StandaloneFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StandaloneFunctions.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +70,8 @@
 		E422D17D1C03CC1700E159F4 /* Coding Challenges */ = {
 			isa = PBXGroup;
 			children = (
+				E44CDFA31C0524ED00F22743 /* StandaloneFunctions.h */,
+				E44CDFA41C0524FC00F22743 /* StandaloneFunctions.m */,
 				E42F7CD41C03C0FB003A629B /* CustomStack.h */,
 				E42F7CD21C03C0EE003A629B /* CustomStack.m */,
 				E42F7CD81C03C88C003A629B /* CustomStackNode.h */,
@@ -205,6 +210,7 @@
 				E42F7CBB1C03B722003A629B /* AppDelegate.m in Sources */,
 				E42F7CD31C03C0EE003A629B /* CustomStack.m in Sources */,
 				E42F7CB81C03B722003A629B /* main.m in Sources */,
+				E44CDFA51C0524FC00F22743 /* StandaloneFunctions.m in Sources */,
 				E42F7CD61C03C111003A629B /* CustomQueue.m in Sources */,
 				E42F7CD11C03B86F003A629B /* MainMapViewController.m in Sources */,
 			);
