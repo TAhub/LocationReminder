@@ -89,6 +89,9 @@
 
 - (IBAction)cancelAction
 {
+	//remove the pin
+	self.completion(nil);
+	
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 

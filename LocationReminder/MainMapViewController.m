@@ -121,7 +121,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-	MKAnnotationView *view = (MKAnnotationView *)sender;
+	MKPinAnnotationView *view = (MKPinAnnotationView *)sender;
 	AddReminderViewController *dest = (AddReminderViewController *)[segue destinationViewController];
 	dest.annotation = view;
 	dest.locationManager = self.locationManager;
@@ -132,8 +132,25 @@
 	{
 		__strong typeof(weakSelf) strongSelf = weakSelf;
 		
-		[strongSelf.mapOutlet removeAnnotation:view.annotation];
-		[strongSelf.mapOutlet addOverlay:circle];
+		if (circle != nil)
+		{
+			[strongSelf.mapOutlet addOverlay:circle];
+			
+			//make an annotation
+			MKPointAnnotation *newAnnotation = [MKPointAnnotation new];
+			newAnnotation.coordinate = view.annotation.coordinate;
+			newAnnotation.title = @"Reminder added";
+			
+			//change the pin
+			view.annotation = newAnnotation;
+			view.pinTintColor = [UIColor blueColor];
+			view.rightCalloutAccessoryView = nil;
+		}
+		else
+		{
+			//remove the pin
+			[strongSelf.mapOutlet removeAnnotation:view.annotation];
+		}
 	};
 }
 
@@ -202,6 +219,8 @@
 	pin.canShowCallout = YES;
 	UIButton *rightCallout = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
 	pin.rightCalloutAccessoryView = rightCallout;
+		
+	pin.pinTintColor = [UIColor redColor];
 	
 	return pin;
 }
@@ -219,6 +238,15 @@
 	}
 }
 
+-(MKOverlayRenderer *) mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay
+{
+	MKCircleRenderer *circleRenderer = [[MKCircleRenderer alloc] initWithOverlay:overlay];
+	circleRenderer.strokeColor = [UIColor blueColor];
+	circleRenderer.fillColor = [UIColor lightGrayColor];
+	circleRenderer.alpha = 0.75;
+	return circleRenderer;
+}
+
 #pragma mark - programatical action selector
 
 -(IBAction)longPress:(UILongPressGestureRecognizer *)sender
@@ -230,7 +258,7 @@
 		CLLocationCoordinate2D touchCoordinate = [self.mapOutlet convertPoint:touchPoint toCoordinateFromView:self.mapOutlet];
 		
 		//make an annotation
-		MKPointAnnotation *newAnnotation = [[MKPointAnnotation alloc] init];
+		MKPointAnnotation *newAnnotation = [MKPointAnnotation new];
 		newAnnotation.coordinate = touchCoordinate;
 		newAnnotation.title = @"Do you want to add a reminder here?";
 		
