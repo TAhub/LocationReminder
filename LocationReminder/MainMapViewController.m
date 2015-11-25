@@ -44,7 +44,7 @@
 		self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
 		self.locationManager.distanceFilter = 100.0f;
 		
-		[self.locationManager requestWhenInUseAuthorization];
+		[self.locationManager requestAlwaysAuthorization];
 	}
 	
 	//add the long press
@@ -174,6 +174,14 @@
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
 	
+}
+
+-(void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
+{
+	UILocalNotification *notification = [UILocalNotification new];
+	notification.alertTitle = @"Location reminder!";
+	notification.alertBody = region.identifier;
+	[[UIApplication sharedApplication] presentLocalNotificationNow:notification];
 }
 
 #pragma mark - map view delegate

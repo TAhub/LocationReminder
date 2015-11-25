@@ -11,9 +11,11 @@
 #import "Reminder.h"
 
 #define MIN_RADIUS 10.0f
-#define MAX_RADIUS 200.0f
+#define MAX_RADIUS 20000.0f
 
 @interface AddReminderViewController () <UITextFieldDelegate>
+
+-(void)setSliderLabel;
 
 @end
 
@@ -27,6 +29,19 @@
 	self.label.text = [NSString stringWithFormat:@" (%f, %f)?", loc.latitude, loc.longitude];
 	
 	self.textOutlet.delegate = self;
+	
+	[self setSliderLabel];
+}
+
+-(void)setSliderLabel
+{
+	float radius = self.radiusSlider.value * MAX_RADIUS + (1 - self.radiusSlider.value) * MIN_RADIUS;
+	self.radiusOutlet.text = [[NSString alloc] initWithFormat:@"Radius: %f", radius];
+}
+
+- (IBAction)sliderChanged
+{
+	[self setSliderLabel];
 }
 
 - (IBAction)addReminderAction

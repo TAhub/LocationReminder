@@ -86,11 +86,8 @@
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="C4g-oZ-KDm">
-                                <rect key="frame" x="-2" y="166" width="604" height="31"/>
-                            </slider>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ljp-0x-0Fi">
-                                <rect key="frame" x="249" y="204" width="103" height="32"/>
+                                <rect key="frame" x="249" y="232" width="103" height="32"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <state key="normal" title="Add Reminder"/>
                                 <connections>
@@ -98,13 +95,25 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mi1-V5-6Qz">
-                                <rect key="frame" x="275" y="244" width="50" height="32"/>
+                                <rect key="frame" x="275" y="272" width="50" height="32"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <state key="normal" title="Cancel"/>
                                 <connections>
                                     <action selector="cancelAction" destination="c5b-Wu-E9U" eventType="touchUpInside" id="idz-IA-2ps"/>
                                 </connections>
                             </button>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="C4g-oZ-KDm">
+                                <rect key="frame" x="-2" y="194" width="604" height="31"/>
+                                <connections>
+                                    <action selector="sliderChanged" destination="c5b-Wu-E9U" eventType="valueChanged" id="nck-9k-wNY"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CP4-E1-H2D">
+                                <rect key="frame" x="280" y="166" width="40" height="20"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -114,20 +123,24 @@
                             <constraint firstItem="ljp-0x-0Fi" firstAttribute="top" secondItem="C4g-oZ-KDm" secondAttribute="bottom" constant="8" symbolic="YES" id="EiM-tk-oAJ"/>
                             <constraint firstItem="GKS-y4-FnV" firstAttribute="centerX" secondItem="Ama-Tk-Ovc" secondAttribute="centerX" id="HIj-YK-blZ"/>
                             <constraint firstItem="ljp-0x-0Fi" firstAttribute="top" secondItem="JT0-0b-0Lt" secondAttribute="bottom" constant="8" symbolic="YES" id="HwL-rq-6mt"/>
+                            <constraint firstItem="C4g-oZ-KDm" firstAttribute="top" secondItem="CP4-E1-H2D" secondAttribute="bottom" constant="8" symbolic="YES" id="QpG-uh-QFX"/>
                             <constraint firstItem="eQi-br-snH" firstAttribute="centerX" secondItem="Ama-Tk-Ovc" secondAttribute="centerX" id="R9h-2j-Rmf"/>
                             <constraint firstItem="JT0-0b-0Lt" firstAttribute="width" secondItem="Ama-Tk-Ovc" secondAttribute="width" id="RkO-9c-ELe"/>
                             <constraint firstItem="ljp-0x-0Fi" firstAttribute="top" secondItem="GKS-y4-FnV" secondAttribute="bottom" constant="8" symbolic="YES" id="Rwv-WC-rJR"/>
                             <constraint firstItem="eQi-br-snH" firstAttribute="centerY" secondItem="Ama-Tk-Ovc" secondAttribute="centerY" multiplier="0.25" id="SVd-Ti-bAo"/>
                             <constraint firstItem="C4g-oZ-KDm" firstAttribute="width" secondItem="Ama-Tk-Ovc" secondAttribute="width" id="aNS-8h-7Ea"/>
                             <constraint firstItem="ljp-0x-0Fi" firstAttribute="centerX" secondItem="Ama-Tk-Ovc" secondAttribute="centerX" id="cjS-Ko-bU8"/>
+                            <constraint firstItem="CP4-E1-H2D" firstAttribute="top" secondItem="JT0-0b-0Lt" secondAttribute="bottom" constant="8" symbolic="YES" id="e7z-O1-Oeb"/>
                             <constraint firstItem="GKS-y4-FnV" firstAttribute="centerY" secondItem="Ama-Tk-Ovc" secondAttribute="centerY" multiplier="0.2" id="fUP-XW-lBT"/>
                             <constraint firstItem="Mi1-V5-6Qz" firstAttribute="centerX" secondItem="Ama-Tk-Ovc" secondAttribute="centerX" id="ge8-Lc-mCk"/>
                             <constraint firstItem="C4g-oZ-KDm" firstAttribute="centerX" secondItem="Ama-Tk-Ovc" secondAttribute="centerX" id="ikX-jL-zNF"/>
                             <constraint firstItem="Mi1-V5-6Qz" firstAttribute="top" secondItem="ljp-0x-0Fi" secondAttribute="bottom" constant="8" symbolic="YES" id="tuy-ho-2Am"/>
                             <constraint firstItem="C4g-oZ-KDm" firstAttribute="top" secondItem="JT0-0b-0Lt" secondAttribute="bottom" constant="8" symbolic="YES" id="vCL-id-BR1"/>
+                            <constraint firstItem="CP4-E1-H2D" firstAttribute="centerX" secondItem="Ama-Tk-Ovc" secondAttribute="centerX" id="vXX-zU-zhJ"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="vCL-id-BR1"/>
                                 <exclude reference="fUP-XW-lBT"/>
                                 <exclude reference="HwL-rq-6mt"/>
                                 <exclude reference="Rwv-WC-rJR"/>
@@ -136,6 +149,7 @@
                     </view>
                     <connections>
                         <outlet property="label" destination="GKS-y4-FnV" id="khj-kO-umd"/>
+                        <outlet property="radiusOutlet" destination="CP4-E1-H2D" id="iLI-ep-9HA"/>
                         <outlet property="radiusSlider" destination="C4g-oZ-KDm" id="50I-hu-ib8"/>
                         <outlet property="textOutlet" destination="JT0-0b-0Lt" id="qkf-Vi-VMx"/>
                     </connections>

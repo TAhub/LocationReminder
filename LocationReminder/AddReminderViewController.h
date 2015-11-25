@@ -24,8 +24,13 @@ typedef void(^DetailViewControllerCompletion)(MKCircle *circle);
 
 - (IBAction)cancelAction;
 
+- (IBAction)sliderChanged;
+
 @property (weak, nonatomic) IBOutlet UISlider *radiusSlider;
 
 @property (weak, nonatomic) IBOutlet UITextField *textOutlet;
+
+@property (weak, nonatomic) IBOutlet UILabel *radiusOutlet;
+
 
 @end
