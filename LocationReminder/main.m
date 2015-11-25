@@ -36,6 +36,10 @@ int main(int argc, char * argv[]) {
 	NSLog(@"Not vs An Anagram: %i", AnagramCheck(@"Not", @"An Anagram"));
 	NSLog(@"NAME PALINDROME CHECK: %i", AnagramCheck(@"Theodore Abshire", @"Dab Theories Hero"));
 	
+	//test the digit summer
+	NSLog(@"171aaaazzz1 = %i", DigitSummer(@"171aaaazzz1"));
+	NSLog(@"qq = %i", DigitSummer(@"qq"));
+	
 	
 	@autoreleasepool {
 	    return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));

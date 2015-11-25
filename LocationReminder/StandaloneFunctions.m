@@ -8,6 +8,24 @@
 
 #import "StandaloneFunctions.h"
 
+int DigitSummer(NSString *digitString)
+{
+	int result = 0;
+	
+	unichar buffer[digitString.length];
+	[digitString getCharacters:buffer range:NSMakeRange(0, digitString.length)];
+	for (int i = 0; i < digitString.length; i++)
+	{
+		if (buffer[i] >= '0' && buffer[i] <= '9')
+		{
+			int num = buffer[i] - '0';
+			result += num;
+		}
+	}
+	
+	return result;
+}
+
 BOOL AnagramCheck(NSString *string1, NSString *string2)
 {
 	//this checks if two strings are anagrams
