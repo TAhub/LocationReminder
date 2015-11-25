@@ -8,8 +8,10 @@
 
 #import "MainMapViewController.h"
 #import "AddReminderViewController.h"
+#import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
 
-@interface MainMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate>
+@interface MainMapViewController () <CLLocationManagerDelegate, MKMapViewDelegate, PFLogInViewControllerDelegate>
 
 @property CLLocationManager *locationManager;
 
@@ -17,6 +19,7 @@
 
 -(void)start;
 -(void)stop;
+-(void)configureSignUpButton;
 -(IBAction)longPress:(UILongPressGestureRecognizer *)sender;
 
 @end
@@ -54,6 +57,9 @@
 {
 	[super viewWillAppear:animated];
 	
+	//set the sign up button text
+	[self configureSignUpButton];
+	
 	[self start];
 }
 
@@ -87,6 +93,30 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)signUpButtonAction
+{
+	if ([PFUser currentUser])
+	{
+		[PFUser logOut];
+		[self configureSignUpButton];
+	}
+	else
+	{
+		//sign on
+		PFLogInViewController *login = [PFLogInViewController new];
+		login.delegate = self;
+		[self presentViewController:login animated:true completion:nil];
+	}
+}
+
+-(void)configureSignUpButton
+{
+	if ([PFUser currentUser])
+		[self.signUpButton setTitle:@"Sign Out" forState:UIControlStateNormal];
+	else
+		[self.signUpButton setTitle:@"Sign On" forState:UIControlStateNormal];
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -96,32 +126,32 @@
 	dest.annotation = view;
 }
 
-- (IBAction)buttonOneAction
-{
-	//move the camera
-	CLLocationCoordinate2D coordTo = CLLocationCoordinate2DMake(25, -71);
-	MKCoordinateSpan spanTo = MKCoordinateSpanMake(15, 15);
-	MKCoordinateRegion regionTo = MKCoordinateRegionMake(coordTo, spanTo);
-	[self.mapOutlet setRegion:regionTo animated:YES];
-}
-
-- (IBAction)buttonTwoAction
-{
-	//move the camera
-	CLLocationCoordinate2D coordTo = CLLocationCoordinate2DMake(36.4511, 28.2278);
-	MKCoordinateSpan spanTo = MKCoordinateSpanMake(0.1, 0.1);
-	MKCoordinateRegion regionTo = MKCoordinateRegionMake(coordTo, spanTo);
-	[self.mapOutlet setRegion:regionTo animated:YES];
-}
-
-- (IBAction)buttonThreeAction
-{
-	//move the camera
-	CLLocationCoordinate2D coordTo = CLLocationCoordinate2DMake(-90, 0);
-	MKCoordinateSpan spanTo = MKCoordinateSpanMake(10, 10);
-	MKCoordinateRegion regionTo = MKCoordinateRegionMake(coordTo, spanTo);
-	[self.mapOutlet setRegion:regionTo animated:YES];
-}
+//- (IBAction)buttonOneAction
+//{
+//	//move the camera
+//	CLLocationCoordinate2D coordTo = CLLocationCoordinate2DMake(25, -71);
+//	MKCoordinateSpan spanTo = MKCoordinateSpanMake(15, 15);
+//	MKCoordinateRegion regionTo = MKCoordinateRegionMake(coordTo, spanTo);
+//	[self.mapOutlet setRegion:regionTo animated:YES];
+//}
+//
+//- (IBAction)buttonTwoAction
+//{
+//	//move the camera
+//	CLLocationCoordinate2D coordTo = CLLocationCoordinate2DMake(36.4511, 28.2278);
+//	MKCoordinateSpan spanTo = MKCoordinateSpanMake(0.1, 0.1);
+//	MKCoordinateRegion regionTo = MKCoordinateRegionMake(coordTo, spanTo);
+//	[self.mapOutlet setRegion:regionTo animated:YES];
+//}
+//
+//- (IBAction)buttonThreeAction
+//{
+//	//move the camera
+//	CLLocationCoordinate2D coordTo = CLLocationCoordinate2DMake(-90, 0);
+//	MKCoordinateSpan spanTo = MKCoordinateSpanMake(10, 10);
+//	MKCoordinateRegion regionTo = MKCoordinateRegionMake(coordTo, spanTo);
+//	[self.mapOutlet setRegion:regionTo animated:YES];
+//}
 
 #pragma mark - location manager delegate
 -(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
@@ -159,7 +189,15 @@
 
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-	[self performSegueWithIdentifier:@"addReminder" sender:view];
+	if ([PFUser currentUser])
+		[self performSegueWithIdentifier:@"addReminder" sender:view];
+	else
+	{
+		//you're not logged in
+		//so have an alert
+		UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"You're not logged in!" message:@"You need to be logged in to add reminders." preferredStyle:UIAlertControllerStyleAlert];
+		[self presentViewController:alert animated:YES completion:nil];
+	}
 }
 
 #pragma mark - programatical action selector
@@ -179,6 +217,14 @@
 		
 		[self.mapOutlet addAnnotation:newAnnotation];
 	}
+}
+
+#pragma mark- login view controller delegate
+
+-(void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
+	[self configureSignUpButton];
 }
 
 @end

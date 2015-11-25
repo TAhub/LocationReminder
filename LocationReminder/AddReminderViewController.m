@@ -7,8 +7,13 @@
 //
 
 #import "AddReminderViewController.h"
+#import <Parse/Parse.h>
+#import "Reminder.h"
 
-@interface AddReminderViewController ()
+#define MIN_RADIUS 10.0f
+#define MAX_RADIUS 200.0f
+
+@interface AddReminderViewController () <UITextFieldDelegate>
 
 @end
 
@@ -20,18 +25,53 @@
 	
 	CLLocationCoordinate2D loc = [self.annotation.annotation coordinate];
 	self.label.text = [NSString stringWithFormat:@" (%f, %f)?", loc.latitude, loc.longitude];
+	
+	self.textOutlet.delegate = self;
 }
 
 - (IBAction)addReminderAction
 {
-	//TODO: add a reminder
+	if ([self.textOutlet.text  isEqualToString: @""])
+	{
+		//it's an empty string
+		//so have an alert
+		UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"There's no message!" message:@"You need to have a message for your reminder!" preferredStyle:UIAlertControllerStyleAlert];
+		[self presentViewController:alert animated:YES completion:nil];
+	}
+	else
+	{
+		CLLocationCoordinate2D loc = [self.annotation.annotation coordinate];
+		
+		//translate the slider into a radius
+		float radius = self.radiusSlider.value * MAX_RADIUS + (1 - self.radiusSlider.value) * MIN_RADIUS;
+		
+		//upload the info
+		Reminder *reminder = [Reminder new];
+		reminder.text = self.textOutlet.text;
+		reminder.radius = [NSNumber numberWithFloat:radius];
+		reminder.location = [PFGeoPoint geoPointWithLatitude:loc.latitude longitude:loc.longitude];
+		
+		[reminder saveInBackgroundWithBlock: ^(BOOL succeeded, NSError * _Nullable error)
+		 {
+			 NSLog(@"Reminder sent to parse.");
+		 }];
+		 
 	
-	[self dismissViewControllerAnimated:YES completion:nil];
+		[self dismissViewControllerAnimated:YES completion:nil];
+	}
 }
 
 - (IBAction)cancelAction
 {
 	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - text field delegate
+
+-(BOOL) textFieldShouldReturn:(UITextField *)textField
+{
+	[textField resignFirstResponder];
+	return YES;
 }
 
 @end

@@ -19,5 +19,8 @@
 
 - (IBAction)cancelAction;
 
+@property (weak, nonatomic) IBOutlet UISlider *radiusSlider;
+
+@property (weak, nonatomic) IBOutlet UITextField *textOutlet;
 
 @end

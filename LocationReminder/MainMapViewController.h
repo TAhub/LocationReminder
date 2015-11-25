@@ -16,11 +16,10 @@
 
 @property (weak, nonatomic) IBOutlet UIView *backerOutlet;
 
-- (IBAction)buttonOneAction;
+@property (weak, nonatomic) IBOutlet UIButton *signUpButton;
 
-- (IBAction)buttonTwoAction;
+- (IBAction)signUpButtonAction;
 
-- (IBAction)buttonThreeAction;
 
 
 @end
