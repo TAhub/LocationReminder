@@ -124,6 +124,17 @@
 	MKAnnotationView *view = (MKAnnotationView *)sender;
 	AddReminderViewController *dest = (AddReminderViewController *)[segue destinationViewController];
 	dest.annotation = view;
+	dest.locationManager = self.locationManager;
+	
+	__weak typeof(self) weakSelf = self;
+	
+	dest.completion = ^(MKCircle *circle)
+	{
+		__strong typeof(weakSelf) strongSelf = weakSelf;
+		
+		[strongSelf.mapOutlet removeAnnotation:view.annotation];
+		[strongSelf.mapOutlet addOverlay:circle];
+	};
 }
 
 //- (IBAction)buttonOneAction
@@ -213,7 +224,7 @@
 		//make an annotation
 		MKPointAnnotation *newAnnotation = [[MKPointAnnotation alloc] init];
 		newAnnotation.coordinate = touchCoordinate;
-		newAnnotation.title = @"Look at this pin!";
+		newAnnotation.title = @"Do you want to add a reminder here?";
 		
 		[self.mapOutlet addAnnotation:newAnnotation];
 	}

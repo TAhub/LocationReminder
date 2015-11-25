@@ -9,9 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
+typedef void(^DetailViewControllerCompletion)(MKCircle *circle);
+
 @interface AddReminderViewController : UIViewController
 
 @property (weak) MKAnnotationView *annotation;
+@property CLLocationManager *locationManager;
+
+@property (copy, nonatomic) DetailViewControllerCompletion completion;
 
 @property (weak, nonatomic) IBOutlet UILabel *label;
 

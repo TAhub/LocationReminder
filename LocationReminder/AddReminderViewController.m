@@ -52,12 +52,23 @@
 		reminder.location = [PFGeoPoint geoPointWithLatitude:loc.latitude longitude:loc.longitude];
 		
 		[reminder saveInBackgroundWithBlock: ^(BOOL succeeded, NSError * _Nullable error)
-		 {
-			 NSLog(@"Reminder sent to parse.");
-		 }];
-		 
-	
-		[self dismissViewControllerAnimated:YES completion:nil];
+		{
+			NSLog(@"Reminder sent to parse.");
+			 
+			//add the actual reminder
+			if ([CLLocationManager isMonitoringAvailableForClass:[CLCircularRegion class]])
+			{
+				//make the region
+				CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:loc radius:radius identifier:reminder.text];
+				[self.locationManager startMonitoringForRegion:region];
+				
+				//pass it back
+				self.completion([MKCircle circleWithCenterCoordinate:loc radius:radius]);
+			}
+			
+			//dismiss
+			[self dismissViewControllerAnimated:YES completion:nil];
+		}];
 	}
 }
 
