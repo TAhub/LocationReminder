@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "Reminder.h"
 
 @interface AppDelegate ()
 
@@ -22,6 +23,9 @@
 	//set up parse
 	[Parse setApplicationId:@"6Z1cuGZ8EQwMGPqFCOFYGlWP57ZTdtYD2ahAnYSH"
 				  clientKey:@"64bZy1Srhcd5PcGEHZoNJCX2qo1BQF0Ky0iAfkBb"];
+	
+	//register reminders
+	[Reminder registerSubclass];
 	
 	//register for notifications
 	UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil];

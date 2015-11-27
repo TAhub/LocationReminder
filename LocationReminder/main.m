@@ -37,7 +37,7 @@ int main(int argc, char * argv[]) {
 	NSLog(@"NAME PALINDROME CHECK: %i", AnagramCheck(@"Theodore Abshire", @"Dab Theories Hero"));
 	
 	//test the digit summer
-	NSLog(@"171aaaazzz1 = %i", DigitSummer(@"171aaaazzz1"));
+	NSLog(@"171aaaazzz1 = %i", DigitSummer(@"17	1aaaazzz1"));
 	NSLog(@"qq = %i", DigitSummer(@"qq"));
 	
 	

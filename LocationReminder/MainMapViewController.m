@@ -8,6 +8,7 @@
 
 #import "MainMapViewController.h"
 #import "AddReminderViewController.h"
+#import "Reminder.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 
@@ -21,6 +22,7 @@
 -(void)stop;
 -(void)configureSignUpButton;
 -(IBAction)longPress:(UILongPressGestureRecognizer *)sender;
+-(void)loadRegions;
 
 @end
 
@@ -51,6 +53,9 @@
 	self.longPressRecognizer = [[UILongPressGestureRecognizer alloc] init];
 	[self.longPressRecognizer addTarget:self action:@selector(longPress:)];
 	[self.mapOutlet addGestureRecognizer:self.longPressRecognizer];
+	
+	//load the regions
+	[self loadRegions];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -105,7 +110,13 @@
 		//sign on
 		PFLogInViewController *login = [PFLogInViewController new];
 		login.delegate = self;
-		[self presentViewController:login animated:true completion:nil];
+		
+		__weak typeof(self) weakSelf = self;
+		
+		[self presentViewController:login animated:true completion:^(void)
+		{
+			[weakSelf loadRegions];
+		}];
 	}
 }
 
@@ -115,6 +126,43 @@
 		[self.signUpButton setTitle:@"Sign Out" forState:UIControlStateNormal];
 	else
 		[self.signUpButton setTitle:@"Sign On" forState:UIControlStateNormal];
+}
+
+-(void)loadRegions
+{
+	if ([PFUser currentUser])
+	{
+		//you've logged in
+		//so load the regions
+		PFQuery *query = [[PFQuery alloc] initWithClassName:[Reminder parseClassName]];
+		
+		__weak typeof(self) weakSelf = self;
+		
+		[query findObjectsInBackgroundWithBlock: ^(NSArray * _Nullable objects, NSError * _Nullable error)
+		{
+			__strong typeof(weakSelf) strongSelf = weakSelf;
+			
+			//add in new overlays
+			if (error)
+			{
+				//you got an error
+			}
+			else
+			{
+				//remove all the previous overlays first
+				[self.mapOutlet removeOverlays:self.mapOutlet.overlays];
+				
+				for (int i = 0; i < objects.count; i++)
+				{
+					Reminder *rem = (Reminder *)objects[i];
+					CLLocationCoordinate2D loc = CLLocationCoordinate2DMake(rem.location.latitude, rem.location.longitude);
+					
+					//make a circle overlay
+					[strongSelf.mapOutlet addOverlay: [MKCircle circleWithCenterCoordinate:loc radius:rem.radius.doubleValue]];
+				}
+			}
+		}];
+	}
 }
 
 #pragma mark - Navigation
