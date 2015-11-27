@@ -41,6 +41,12 @@ int main(int argc, char * argv[]) {
 	NSLog(@"qq = %i", DigitSummer(@"qq"));
 	
 	
+	//the thursday code challenge was to implement a linked list
+	//but technically my implementations for queue and stack are both linked-list based
+	//so I already did it
+	//so... yay, thursday's work complete!
+	
+	
 	@autoreleasepool {
 	    return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
 	}
